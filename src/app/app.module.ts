@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ApiService } from './services/api.service';
+import { MovieService } from './services/movie.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +17,11 @@ import { AppComponent } from './app.component';
     IonicModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiService,
+    MovieService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

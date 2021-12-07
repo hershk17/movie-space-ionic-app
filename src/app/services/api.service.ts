@@ -94,28 +94,9 @@ export class ApiService {
     }
 
     try {
-      const movies = this.httpClient.get<Movie[]>(completeURL);
-      console.log(movies);
-      return movies;
+      return this.httpClient.get<Movie[]>(completeURL);
     } catch (err) {
       console.log('ERROR: ' + err);
     }
-
-    // const imageResolution = highQualityImages ? "780" : "300";
-
-    // foreach (Models.Movie i in resultList)
-    // {
-    //     if (cnt == maxCnt)
-    //         break;
-
-    //     if(i.vote_count > 0 && i.popularity > 10)
-    //         movieCollection.Add(new Models.Movie(i.id, i.title, "https://image.tmdb.org/t/p/w" + imageResolution + i.poster_path,
-    //             "https://image.tmdb.org/t/p/w" + imageResolution + i.backdrop_path, i.vote_average, i.vote_count, i.popularity,
-    //             i.release_date, i.userWatchStatus, i.userRating));
-
-    //     cnt++;
-    // }
-
-    // return movieCollection;
   }
 }
