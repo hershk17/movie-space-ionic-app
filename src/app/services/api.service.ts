@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../shared/movie';
@@ -26,30 +27,27 @@ export class ApiService {
   private apiParam = '?api_key=';
   private videosParam = '/videos';
   private genresParam = '&with_genres=';
-  private recommendationsParam = '/recommendations';
   private languageParam = '&language=en-US';
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   public getMovies(
     type: string,
     highQualityImages = false,
     query: string = null,
     genre = -1,
-    id = -1,
     limit = 10
   ): Observable<Movie[]> {
     let completeURL = '';
-    let elem = 1;
-    let cnt = 0;
-    let maxCnt = limit;
+    // let elem = 1;
+    // let maxCnt = limit;
 
     switch (type) {
       case 'nowPlaying':
         completeURL =
           this.nowPlaying + this.apiParam + this.key + this.languageParam;
-        elem = 2;
-        maxCnt = 5;
+        // elem = 2;
+        // maxCnt = 5;
         break;
       case 'trending':
         completeURL =
@@ -62,7 +60,7 @@ export class ApiService {
       case 'upcoming':
         completeURL =
           this.upcomingURL + this.apiParam + this.key + this.languageParam;
-        elem = 2;
+        // elem = 2;
         break;
       case 'search':
         completeURL =
@@ -70,9 +68,9 @@ export class ApiService {
           this.apiParam +
           this.key +
           this.queryParam +
-          this.query +
+          query +
           this.languageParam;
-        maxCnt = 20;
+        // maxCnt = 20;
         break;
       case 'genre':
         completeURL =
@@ -82,17 +80,42 @@ export class ApiService {
           this.genresParam +
           genre +
           this.languageParam;
-        maxCnt = 20;
+        // maxCnt = 20;
         break;
       case 'popular':
         completeURL =
           this.popularURL + this.apiParam + this.key + this.languageParam;
-        maxCnt = 20;
+        // maxCnt = 20;
         break;
       default:
         completeURL =
           this.nowPlaying + this.apiParam + this.key + this.languageParam;
         break;
     }
+
+    try {
+      const movies = this.httpClient.get<Movie[]>(completeURL);
+      console.log(movies);
+      return movies;
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+
+    // const imageResolution = highQualityImages ? "780" : "300";
+
+    // foreach (Models.Movie i in resultList)
+    // {
+    //     if (cnt == maxCnt)
+    //         break;
+
+    //     if(i.vote_count > 0 && i.popularity > 10)
+    //         movieCollection.Add(new Models.Movie(i.id, i.title, "https://image.tmdb.org/t/p/w" + imageResolution + i.poster_path,
+    //             "https://image.tmdb.org/t/p/w" + imageResolution + i.backdrop_path, i.vote_average, i.vote_count, i.popularity,
+    //             i.release_date, i.userWatchStatus, i.userRating));
+
+    //     cnt++;
+    // }
+
+    // return movieCollection;
   }
 }

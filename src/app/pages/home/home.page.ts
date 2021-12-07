@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { Movie } from 'src/app/shared/movie';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  nowPlayingMovies: Movie[] = [];
 
-  constructor() { }
+  constructor(private api: ApiService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public async getNowPlayingMovies() {
+    this.api.getMovies('nowPlaying').subscribe((data) => {
+      this.nowPlayingMovies = data;
+    });
   }
-
 }
