@@ -1,0 +1,7 @@
+{
+  "name": "movie-space-ionic-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
