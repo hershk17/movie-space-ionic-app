@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { MovieDetail } from '../models/movie-detail';
+import { MovieService } from './movie.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class DbService {
     private platform: Platform,
     private sqlite: SQLite,
     private httpClient: HttpClient,
-    private sqlPorter: SQLitePorter
+    private sqlPorter: SQLitePorter,
+    private ms: MovieService
   ) {
     this.platform.ready().then(() => {
       this.sqlite
@@ -36,8 +38,7 @@ export class DbService {
                 .then((_) => {
                   this.loadMovies();
                   this.isDbReady.next(true);
-                })
-                .catch((error) => console.error(error));
+                });
             });
         });
     });
@@ -61,21 +62,16 @@ export class DbService {
           title: res.rows.item(i).title,
           posterURL: res.rows.item(i).posterURL,
           overview: res.rows.item(i).overview,
-          adult: res.rows.item(i).adult,
           backdropURL: res.rows.item(i).backdropURL,
+          budget: res.rows.item(i).budeget,
           genres: res.rows.item(i).genres,
           homepage: res.rows.item(i).homepage,
           language: res.rows.item(i).lang,
-          popularity: res.rows.item(i).popularity,
           releaseDate: res.rows.item(i).releaseDate,
           revenue: res.rows.item(i).revenue,
           runtime: res.rows.item(i).runtime,
-          tagline: res.rows.item(i).tagline,
-          video: res.rows.item(i).video,
           voteAvg: res.rows.item(i).voteAvg,
           voteCnt: res.rows.item(i).voteCnt,
-          userWatchStatus: res.rows.item(i).userWatchStatus,
-          userRating: res.rows.item(i).userRating,
         });
       }
     }
@@ -88,26 +84,25 @@ export class DbService {
       movie.title,
       movie.posterURL,
       movie.overview,
-      movie.adult,
       movie.backdropURL,
+      movie.budget,
       JSON.stringify(movie.genres),
       movie.homepage,
       movie.language,
-      movie.popularity,
       movie.releaseDate,
       movie.revenue,
       movie.runtime,
-      movie.tagline,
-      movie.video,
       movie.voteAvg,
       movie.voteCnt,
-      movie.userWatchStatus,
-      movie.userRating,
     ];
-    const res = await this.storage.executeSql(
-      'INSERT INTO moviesTable VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      data
-    );
+    await this.storage
+      .executeSql(
+        'INSERT INTO moviesTable VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+        data
+      )
+      .then(() => {
+        this.ms.presentToast('Movie added to Library!', 'success');
+      });
     this.loadMovies();
   }
 
@@ -119,21 +114,16 @@ export class DbService {
         title: res.rows.item(0).title,
         posterURL: res.rows.item(0).posterURL,
         overview: res.rows.item(0).overview,
-        adult: res.rows.item(0).adult,
         backdropURL: res.rows.item(0).backdropURL,
+        budget: res.rows.item(0).budget,
         genres: JSON.parse(res.rows.item(0).genres),
         homepage: res.rows.item(0).homepage,
         language: res.rows.item(0).lang,
-        popularity: res.rows.item(0).popularity,
         releaseDate: res.rows.item(0).releaseDate,
         revenue: res.rows.item(0).revenue,
         runtime: res.rows.item(0).runtime,
-        tagline: res.rows.item(0).tagline,
-        video: res.rows.item(0).video,
         voteAvg: res.rows.item(0).voteAvg,
         voteCnt: res.rows.item(0).voteCnt,
-        userWatchStatus: res.rows.item(0).userWatchStatus,
-        userRating: res.rows.item(0).userRating,
       }));
   }
 
@@ -146,10 +136,11 @@ export class DbService {
   }
 
   public async deleteMovie(id: number) {
-    const _ = await this.storage.executeSql(
-      'DELETE FROM moviesTable WHERE id = ?',
-      [id]
-    );
+    await this.storage
+      .executeSql('DELETE FROM moviesTable WHERE id = ?', [id])
+      .then(() => {
+        this.ms.presentToast('Movie removed from Library.', 'warning');
+      });
     this.loadMovies();
   }
 }

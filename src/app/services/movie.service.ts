@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Movie } from '../models/movie';
 import { MovieDetail } from '../models/movie-detail';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  constructor() {}
+  constructor(public toastController: ToastController) {}
+
+  async presentToast(msg: string, c: string = 'dark') {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      color: c,
+      position: 'top',
+      cssClass: 'header-top',
+    });
+    toast.present();
+  }
 
   public parseMovies(res: any): Movie[] {
     const movies: Movie[] = [];
@@ -27,21 +39,16 @@ export class MovieService {
       title: data.title,
       posterURL: data.poster_path,
       overview: data.overview,
-      adult: data.adult,
       backdropURL: data.backdrop_path,
+      budget: data.budget,
       genres: data.genres,
       homepage: data.homepage,
       language: data.original_language,
-      popularity: data.popularity,
       releaseDate: data.release_date,
       revenue: data.revenue,
       runtime: data.runtime,
-      tagline: data.tagline,
-      video: data.video,
       voteAvg: data.vote_average,
       voteCnt: data.vote_count,
-      userWatchStatus: '',
-      userRating: -1,
     };
   }
 }

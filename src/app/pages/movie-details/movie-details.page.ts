@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { DbService } from 'src/app/services/db.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Location } from '@angular/common';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-movie-details',
@@ -21,10 +22,23 @@ export class MovieDetailsPage implements OnInit {
     private db: DbService,
     private api: ApiService,
     private ms: MovieService,
-    private readonly location: Location
+    private readonly location: Location,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {}
+
+  convertMinsToHrsMins = (mins: number) => {
+    let h = Math.floor(mins / 60);
+    let m = Math.round(mins % 60);
+    h = h < 10 ? Number('0' + h) : h;
+    m = m < 10 ? Number('0' + m) : m;
+    return `${h}h${m}m`;
+  };
+
+  onBackClick() {
+    this.location.back();
+  }
 
   ionViewWillEnter() {
     this.isLoaded = false;
@@ -46,7 +60,7 @@ export class MovieDetailsPage implements OnInit {
       });
   }
 
-  public onAdd() {
+  public async onAdd() {
     this.db.addMovie(this.movie);
     this.isSaved = true;
   }

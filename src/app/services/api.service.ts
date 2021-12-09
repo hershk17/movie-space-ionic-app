@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Genre } from '../models/genre';
 import { Movie } from '../models/movie';
 import { MovieDetail } from '../models/movie-detail';
+import { MovieService } from './movie.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,16 +22,15 @@ export class ApiService {
   private topRatedURL = this.domainURL + 'movie/top_rated';
   private upcomingURL = this.domainURL + 'movie/upcoming';
 
-  // private genresURL = this.domainURL + 'genre/movie/list';
+  private genresURL = this.domainURL + 'genre/movie/list';
   private genreMoviesURL = this.domainURL + 'discover/movie';
 
   private queryParam = '&query=';
   private apiParam = '?api_key=';
-  // private videosParam = '/videos';
   private genresParam = '&with_genres=';
   private languageParam = '&language=en-US';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private ms: MovieService) {}
 
   public getNowPlayingMovies(): Observable<Movie[]> {
     try {
@@ -37,7 +38,7 @@ export class ApiService {
         this.nowPlaying + this.apiParam + this.key + this.languageParam
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('loading now playing movies');
     }
   }
 
@@ -47,7 +48,7 @@ export class ApiService {
         this.trendingURL + this.apiParam + this.key + this.languageParam
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('loading trending movies');
     }
   }
 
@@ -57,7 +58,7 @@ export class ApiService {
         this.upcomingURL + this.apiParam + this.key + this.languageParam
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('loading upcoming movies');
     }
   }
 
@@ -67,7 +68,7 @@ export class ApiService {
         this.topRatedURL + this.apiParam + this.key + this.languageParam
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('loading top rated movies');
     }
   }
 
@@ -82,7 +83,7 @@ export class ApiService {
           this.languageParam
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('searching');
     }
   }
 
@@ -97,7 +98,7 @@ export class ApiService {
           this.languageParam
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('getting movies of genre');
     }
   }
 
@@ -107,7 +108,17 @@ export class ApiService {
         this.detailsURL + id + this.apiParam + this.key
       );
     } catch (err) {
-      console.log('ERROR: ' + err);
+      console.log('getting movie details');
+    }
+  }
+
+  public getGenres(): Observable<Genre[]> {
+    try {
+      return this.httpClient.get<Genre[]>(
+        this.genresURL + this.apiParam + this.key
+      );
+    } catch (err) {
+      console.log('getting genres');
     }
   }
 }
