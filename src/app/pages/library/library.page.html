@@ -5,5 +5,18 @@
 </ion-header>
 
 <ion-content>
+  <ion-button (click)="readData()" expand="block" fill="solid" shape="round">
+    Read DB Movies
+  </ion-button>
 
+  <ion-list>
+    <ion-card *ngFor="let movie of this.movies">
+      <ion-grid>
+        <ion-col>
+          <ion-img [src]="'https://image.tmdb.org/t/p/w300' + movie.posterURL"></ion-img>
+        </ion-col>
+        <ion-col> {{movie.title}} </ion-col>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
 </ion-content>

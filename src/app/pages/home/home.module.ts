@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { MovieCardsModule } from '../../components/movie-cards/movie-cards.module';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    MovieCardsModule
   ],
   declarations: [HomePage]
 })

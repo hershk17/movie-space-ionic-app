@@ -28,6 +28,7 @@ export class MovieService {
         userRating: -1,
       });
     });
+    console.log(movies);
     return movies;
   }
 }

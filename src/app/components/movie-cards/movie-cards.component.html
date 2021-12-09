@@ -1,0 +1,19 @@
+<ion-slides
+  [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"
+>
+  <ion-slide
+    *ngFor="let movie of this.movies"
+    style="width: 160px; background-color: transparent"
+  >
+    <ion-col>
+      <ion-button
+        [routerLink]="['/movie', movie.id]"
+        fill="clear"
+        class="ion-no-padding"
+        style="width: auto; height: auto; --border-radius: 10px"
+      >
+        <img [src]="'https://image.tmdb.org/t/p/w300' + movie.posterURL" />
+      </ion-button>
+    </ion-col>
+  </ion-slide>
+</ion-slides>

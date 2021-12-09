@@ -8,76 +8,20 @@
   <ion-item>
     <h1>Now Playing</h1>
   </ion-item>
-  <ion-slides
-    [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"
-  >
-    <ion-slide
-      *ngFor="let movie of this.nowPlayingMovies"
-      style="width: 150px; height: 200px"
-    >
-      <ion-col>
-        <ion-img
-          style="pointer-events: none"
-          [src]="'https://image.tmdb.org/t/p/w300/' + movie.posterURL"
-        ></ion-img>
-      </ion-col>
-    </ion-slide>
-  </ion-slides>
-
-  <ion-item>
-    <h1>Upcoming</h1>
-  </ion-item>
-  <ion-slides
-    [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"
-  >
-    <ion-slide
-      *ngFor="let movie of this.upcomingMovies"
-      style="width: 150px; height: 200px"
-    >
-      <ion-col>
-        <ion-img
-          style="pointer-events: none"
-          [src]="'https://image.tmdb.org/t/p/w300/' + movie.posterURL"
-        ></ion-img>
-      </ion-col>
-    </ion-slide>
-  </ion-slides>
+  <app-movie-cards [movies]="this.nowPlayingMovies"></app-movie-cards>
 
   <ion-item>
     <h1>Trending</h1>
   </ion-item>
-  <ion-slides
-    [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"
-  >
-    <ion-slide
-      *ngFor="let movie of this.trendingMovies"
-      style="width: 150px; height: 200px"
-    >
-      <ion-col>
-        <ion-img
-          style="pointer-events: none"
-          [src]="'https://image.tmdb.org/t/p/w300/' + movie.posterURL"
-        ></ion-img>
-      </ion-col>
-    </ion-slide>
-  </ion-slides>
+  <app-movie-cards [movies]="this.trendingMovies"></app-movie-cards>
+
+  <ion-item>
+    <h1>Upcoming</h1>
+  </ion-item>
+  <app-movie-cards [movies]="this.upcomingMovies"></app-movie-cards>
 
   <ion-item>
     <h1>Top Rated</h1>
   </ion-item>
-  <ion-slides
-    [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"
-  >
-    <ion-slide
-      *ngFor="let movie of this.topRatedMovies"
-      style="width: 150px; height: 200px"
-    >
-      <ion-col>
-        <ion-img
-          style="pointer-events: none"
-          [src]="'https://image.tmdb.org/t/p/w300/' + movie.posterURL"
-        ></ion-img>
-      </ion-col>
-    </ion-slide>
-  </ion-slides>
+  <app-movie-cards [movies]="this.topRatedMovies"></app-movie-cards>
 </ion-content>
