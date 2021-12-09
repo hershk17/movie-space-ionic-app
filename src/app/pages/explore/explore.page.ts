@@ -13,11 +13,6 @@ export class ExplorePage implements OnInit {
   constructor(private api: ApiService) {}
 
   ngOnInit() {
-    this.api.getGenres().subscribe((data: any) => {
-      data.array.forEach((genre) => {
-        this.genres.push({ id: genre.id, name: genre.name });
-      });
-      console.log(this.genres);
-    });
+    this.genres = this.api.getGenres();
   }
 }

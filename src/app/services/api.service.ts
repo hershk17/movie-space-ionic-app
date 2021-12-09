@@ -21,14 +21,91 @@ export class ApiService {
   private trendingURL = this.domainURL + 'trending/movie/week';
   private topRatedURL = this.domainURL + 'movie/top_rated';
   private upcomingURL = this.domainURL + 'movie/upcoming';
-
-  private genresURL = this.domainURL + 'genre/movie/list';
   private genreMoviesURL = this.domainURL + 'discover/movie';
 
   private queryParam = '&query=';
   private apiParam = '?api_key=';
   private genresParam = '&with_genres=';
   private languageParam = '&language=en-US';
+
+  private genres: Genre[] = [
+    {
+      id: 28,
+      name: 'Action',
+    },
+    {
+      id: 12,
+      name: 'Adventure',
+    },
+    {
+      id: 16,
+      name: 'Animation',
+    },
+    {
+      id: 35,
+      name: 'Comedy',
+    },
+    {
+      id: 80,
+      name: 'Crime',
+    },
+    {
+      id: 99,
+      name: 'Documentary',
+    },
+    {
+      id: 18,
+      name: 'Drama',
+    },
+    {
+      id: 10751,
+      name: 'Family',
+    },
+    {
+      id: 14,
+      name: 'Fantasy',
+    },
+    {
+      id: 36,
+      name: 'History',
+    },
+    {
+      id: 27,
+      name: 'Horror',
+    },
+    {
+      id: 10402,
+      name: 'Music',
+    },
+    {
+      id: 9648,
+      name: 'Mystery',
+    },
+    {
+      id: 10749,
+      name: 'Romance',
+    },
+    {
+      id: 878,
+      name: 'Science Fiction',
+    },
+    {
+      id: 10770,
+      name: 'TV Movie',
+    },
+    {
+      id: 53,
+      name: 'Thriller',
+    },
+    {
+      id: 10752,
+      name: 'War',
+    },
+    {
+      id: 37,
+      name: 'Western',
+    },
+  ];
 
   constructor(private httpClient: HttpClient, private ms: MovieService) {}
 
@@ -72,6 +149,16 @@ export class ApiService {
     }
   }
 
+  public getMovieDetails(id: number): Observable<MovieDetail> {
+    try {
+      return this.httpClient.get<MovieDetail>(
+        this.detailsURL + id + this.apiParam + this.key
+      );
+    } catch (err) {
+      console.log('getting movie details');
+    }
+  }
+
   public searchMovies(query: string): Observable<Movie[]> {
     try {
       return this.httpClient.get<Movie[]>(
@@ -87,6 +174,14 @@ export class ApiService {
     }
   }
 
+  public getGenres(): Genre[] {
+    return this.genres;
+  }
+
+  public getGenreName(id: number): string {
+    return this.genres.find((genre) => genre.id === id).name;
+  }
+
   public getMoviesByGenre(id: number): Observable<Movie[]> {
     try {
       return this.httpClient.get<Movie[]>(
@@ -99,26 +194,6 @@ export class ApiService {
       );
     } catch (err) {
       console.log('getting movies of genre');
-    }
-  }
-
-  public getMovieDetails(id: number): Observable<MovieDetail> {
-    try {
-      return this.httpClient.get<MovieDetail>(
-        this.detailsURL + id + this.apiParam + this.key
-      );
-    } catch (err) {
-      console.log('getting movie details');
-    }
-  }
-
-  public getGenres(): Observable<Genre[]> {
-    try {
-      return this.httpClient.get<Genre[]>(
-        this.genresURL + this.apiParam + this.key
-      );
-    } catch (err) {
-      console.log('getting genres');
     }
   }
 }

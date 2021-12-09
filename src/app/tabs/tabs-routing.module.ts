@@ -55,7 +55,14 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'explore/genre/:id',
+        path: 'explore/genre/:genreID',
+        loadChildren: () =>
+          import('../pages/explore-genre/explore-genre.module').then(
+            (m) => m.ExploreGenrePageModule
+          ),
+      },
+      {
+        path: 'explore/genre/:genreID/movie/:id',
         loadChildren: () =>
           import('../pages/movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule

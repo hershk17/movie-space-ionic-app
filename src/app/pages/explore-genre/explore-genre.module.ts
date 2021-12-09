@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { SearchPageRoutingModule } from './search-routing.module';
-import { SearchPage } from './search.page';
+
+import { ExploreGenrePageRoutingModule } from './explore-genre-routing.module';
+
+import { ExploreGenrePage } from './explore-genre.page';
 import { MovieListModule } from 'src/app/components/movie-list/movie-list.module';
 
 @NgModule({
@@ -11,9 +14,9 @@ import { MovieListModule } from 'src/app/components/movie-list/movie-list.module
     CommonModule,
     FormsModule,
     IonicModule,
-    SearchPageRoutingModule,
+    ExploreGenrePageRoutingModule,
     MovieListModule
   ],
-  declarations: [SearchPage]
+  declarations: [ExploreGenrePage]
 })
-export class SearchPageModule {}
+export class ExploreGenrePageModule {}

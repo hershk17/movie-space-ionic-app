@@ -10,7 +10,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-row>
-    <ion-card *ngFor="let genre of this.genres"></ion-card>
+  <ion-row style="margin-top: 10px">
+    <ion-col size="6" *ngFor="let genre of this.genres">
+      <ion-card
+        button="true"
+        [routerLink]="['./genre',genre.id]"
+        color="light"
+        style="border-radius: 5px; margin: 5px; padding: 5px"
+      >
+        <ion-card-header>
+          <ion-card-subtitle>{{genre.id}}</ion-card-subtitle>
+          <ion-card-title>{{genre.name}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
   </ion-row>
 </ion-content>

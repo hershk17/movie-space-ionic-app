@@ -1,0 +1,29 @@
+<ion-list>
+  <ion-card
+    *ngFor="let movie of this.movies"
+    button="true"
+    [routerLink]="['./movie', movie.id]"
+    style="margin: 20px; margin-top: 10px; border-radius: 10px"
+  >
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <img
+            style="border-radius: 10px"
+            [src]="'https://image.tmdb.org/t/p/w300' + movie.posterURL"
+          />
+        </ion-col>
+        <ion-col size="8">
+          <ion-card-header style="padding: 0px">
+            <ion-card-title style="padding: 10px">{{
+              movie.title
+            }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="padding: 10px">
+            some more info maybe here
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-list>
