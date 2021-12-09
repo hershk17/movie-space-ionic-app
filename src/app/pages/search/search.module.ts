@@ -13,7 +13,7 @@ import { SearchPage } from './search.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SearchPageRoutingModule
+    SearchPageRoutingModule,
   ],
   declarations: [SearchPage]
 })

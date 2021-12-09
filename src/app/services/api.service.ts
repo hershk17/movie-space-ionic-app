@@ -8,7 +8,7 @@ import { MovieDetail } from '../models/movie-detail';
   providedIn: 'root',
 })
 export class ApiService {
-  private key = '33f0b7dbdcaef3a551cf390bfec1c63c';
+  private key = 'b61c3d7ddbc8f89a944400e21ffea7f0';
 
   private domainURL = 'https://api.themoviedb.org/3/';
 
@@ -71,7 +71,7 @@ export class ApiService {
     }
   }
 
-  public searchMovie(query: string): Observable<Movie[]> {
+  public searchMovies(query: string): Observable<Movie[]> {
     try {
       return this.httpClient.get<Movie[]>(
         this.searchURL +

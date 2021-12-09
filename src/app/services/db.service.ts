@@ -83,9 +83,30 @@ export class DbService {
   }
 
   public async addMovie(movie: MovieDetail) {
+    const data = [
+      movie.id,
+      movie.title,
+      movie.posterURL,
+      movie.overview,
+      movie.adult,
+      movie.backdropURL,
+      JSON.stringify(movie.genres),
+      movie.homepage,
+      movie.language,
+      movie.popularity,
+      movie.releaseDate,
+      movie.revenue,
+      movie.runtime,
+      movie.tagline,
+      movie.video,
+      movie.voteAvg,
+      movie.voteCnt,
+      movie.userWatchStatus,
+      movie.userRating,
+    ];
     const res = await this.storage.executeSql(
-      'INSERT INTO moviesTable (artist_name, song_name) VALUES (?, ?)',
-      Object.values(movie)
+      'INSERT INTO moviesTable VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+      data
     );
     this.loadMovies();
   }
@@ -100,7 +121,7 @@ export class DbService {
         overview: res.rows.item(0).overview,
         adult: res.rows.item(0).adult,
         backdropURL: res.rows.item(0).backdropURL,
-        genres: res.rows.item(0).genres,
+        genres: JSON.parse(res.rows.item(0).genres),
         homepage: res.rows.item(0).homepage,
         language: res.rows.item(0).lang,
         popularity: res.rows.item(0).popularity,

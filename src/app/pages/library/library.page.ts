@@ -20,7 +20,6 @@ export class LibraryPage implements OnInit {
       if (res) {
         this.db.fetchMovies().subscribe((item) => {
           this.movies = item;
-          console.log(this.movies);
         });
       }
     });

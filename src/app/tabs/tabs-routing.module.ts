@@ -13,17 +13,10 @@ const routes: Routes = [
           import('../pages/home/home.module').then((m) => m.HomePageModule),
       },
       {
-        path: 'explore',
+        path: 'home/movie/:id',
         loadChildren: () =>
-          import('../pages/explore/explore.module').then(
-            (m) => m.ExplorePageModule
-          ),
-      },
-      {
-        path: 'library',
-        loadChildren: () =>
-          import('../pages/library/library.module').then(
-            (m) => m.LibraryPageModule
+          import('../pages/movie-details/movie-details.module').then(
+            (m) => m.MovieDetailsPageModule
           ),
       },
       {
@@ -34,6 +27,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'home/search/movie/:id',
+        loadChildren: () =>
+          import('../pages/movie-details/movie-details.module').then(
+            (m) => m.MovieDetailsPageModule
+          ),
+      },
+      {
+        path: 'explore',
+        loadChildren: () =>
+          import('../pages/explore/explore.module').then(
+            (m) => m.ExplorePageModule
+          ),
+      },
+      {
         path: 'explore/search',
         loadChildren: () =>
           import('../pages/search/search.module').then(
@@ -41,7 +48,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'home/movie/:id',
+        path: 'explore/search/movie/:id',
         loadChildren: () =>
           import('../pages/movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
@@ -52,6 +59,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('../pages/movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
+          ),
+      },
+      {
+        path: 'library',
+        loadChildren: () =>
+          import('../pages/library/library.module').then(
+            (m) => m.LibraryPageModule
           ),
       },
       {

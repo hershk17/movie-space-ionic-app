@@ -25,9 +25,25 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button>
+  <ion-fab
+    *ngIf="!this.isSaved && this.isLoaded"
+    vertical="top"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="onAdd()" color="success">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab
+    *ngIf="this.isSaved && this.isLoaded"
+    vertical="top"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="onRemove()" color="danger">
+      <ion-icon name="remove"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
