@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
+import { MovieDetail } from '../models/movie-detail';
 
 @Injectable({
   providedIn: 'root',
@@ -18,83 +19,93 @@ export class ApiService {
   private trendingURL = this.domainURL + 'trending/movie/week';
   private topRatedURL = this.domainURL + 'movie/top_rated';
   private upcomingURL = this.domainURL + 'movie/upcoming';
-  private popularURL = this.domainURL + 'movie/popular';
 
-  private genresURL = this.domainURL + 'genre/movie/list';
+  // private genresURL = this.domainURL + 'genre/movie/list';
   private genreMoviesURL = this.domainURL + 'discover/movie';
 
   private queryParam = '&query=';
   private apiParam = '?api_key=';
-  private videosParam = '/videos';
+  // private videosParam = '/videos';
   private genresParam = '&with_genres=';
   private languageParam = '&language=en-US';
 
   constructor(private httpClient: HttpClient) {}
 
-  public getMovies(
-    type: string,
-    highQualityImages = false,
-    query: string = null,
-    genre = -1,
-    limit = 10
-  ): Observable<Movie[]> {
-    let completeURL = '';
-    // let elem = 1;
-    // let maxCnt = limit;
+  public getNowPlayingMovies(): Observable<Movie[]> {
+    try {
+      return this.httpClient.get<Movie[]>(
+        this.nowPlaying + this.apiParam + this.key + this.languageParam
+      );
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+  }
 
-    switch (type) {
-      case 'nowPlaying':
-        completeURL =
-          this.nowPlaying + this.apiParam + this.key + this.languageParam;
-        // elem = 2;
-        // maxCnt = 5;
-        break;
-      case 'trending':
-        completeURL =
-          this.trendingURL + this.apiParam + this.key + this.languageParam;
-        break;
-      case 'topRated':
-        completeURL =
-          this.topRatedURL + this.apiParam + this.key + this.languageParam;
-        break;
-      case 'upcoming':
-        completeURL =
-          this.upcomingURL + this.apiParam + this.key + this.languageParam;
-        // elem = 2;
-        break;
-      case 'search':
-        completeURL =
-          this.searchURL +
+  public getTrendingMovies(): Observable<Movie[]> {
+    try {
+      return this.httpClient.get<Movie[]>(
+        this.trendingURL + this.apiParam + this.key + this.languageParam
+      );
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+  }
+
+  public getUpcomingMovies(): Observable<Movie[]> {
+    try {
+      return this.httpClient.get<Movie[]>(
+        this.upcomingURL + this.apiParam + this.key + this.languageParam
+      );
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+  }
+
+  public getTopRatedMovies(): Observable<Movie[]> {
+    try {
+      return this.httpClient.get<Movie[]>(
+        this.topRatedURL + this.apiParam + this.key + this.languageParam
+      );
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+  }
+
+  public searchMovie(query: string): Observable<Movie[]> {
+    try {
+      return this.httpClient.get<Movie[]>(
+        this.searchURL +
           this.apiParam +
           this.key +
           this.queryParam +
           query +
-          this.languageParam;
-        // maxCnt = 20;
-        break;
-      case 'genre':
-        completeURL =
-          this.genreMoviesURL +
+          this.languageParam
+      );
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+  }
+
+  public getMoviesByGenre(id: number): Observable<Movie[]> {
+    try {
+      return this.httpClient.get<Movie[]>(
+        this.genreMoviesURL +
           this.apiParam +
           this.key +
           this.genresParam +
-          genre +
-          this.languageParam;
-        // maxCnt = 20;
-        break;
-      case 'popular':
-        completeURL =
-          this.popularURL + this.apiParam + this.key + this.languageParam;
-        // maxCnt = 20;
-        break;
-      default:
-        completeURL =
-          this.nowPlaying + this.apiParam + this.key + this.languageParam;
-        break;
+          id +
+          this.languageParam
+      );
+    } catch (err) {
+      console.log('ERROR: ' + err);
     }
+  }
 
+  public getMovieDetails(id: number): Observable<MovieDetail> {
     try {
-      return this.httpClient.get<Movie[]>(completeURL);
+      return this.httpClient.get<MovieDetail>(
+        this.detailsURL + id + this.apiParam + this.key
+      );
     } catch (err) {
       console.log('ERROR: ' + err);
     }

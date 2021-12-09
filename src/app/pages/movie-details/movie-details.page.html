@@ -1,9 +1,57 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Movie Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.movie?.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-img
+    [src]="'https://image.tmdb.org/t/p/w1280' + this.movie?.backdropURL"
+  ></ion-img>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-img
+          [src]="'https://image.tmdb.org/t/p/w780' + this.movie?.posterURL"
+        ></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-row> {{this.movie?.title}} </ion-row>
+        <ion-row> {{this.movie?.voteAvg}} ({{this.movie?.voteCnt}}) </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card>
+    <ion-card-title>Overview</ion-card-title>
+    <ion-card-content> {{this.movie?.overview}} </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-title>Genres</ion-card-title>
+    <ion-card-content>
+      <ion-text *ngFor="let genre of this.movie?.genres" color="primary">
+        {{genre.name}}
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-title>Additional Info</ion-card-title>
+    <ion-card-content>
+      Release Date: {{this.movie?.releaseDate}} Runtime: {{this.movie?.runtime}}
+      Budget: {{this.movie?.budget}} Revenue: {{this.movie?.revenue}} Language:
+      {{this.movie?.language}} extraextra Video: {{this.movie?.video}} Adult:
+      {{this.movie?.adult}} Homepage: {{this.movie?.homepage}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

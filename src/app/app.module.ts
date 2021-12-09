@@ -9,6 +9,7 @@ import { MovieService } from './services/movie.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+import { DbService } from './services/db.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
     SQLitePorter,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ApiService,
+    DbService,
     MovieService,
   ],
   bootstrap: [AppComponent],

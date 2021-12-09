@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Movie } from '../models/movie';
+import { MovieDetail } from '../models/movie-detail';
 
 @Injectable({
   providedIn: 'root',
@@ -11,24 +12,36 @@ export class MovieService {
     const movies: Movie[] = [];
     res.forEach((movie: any) => {
       movies.push({
-        posterURL: movie.poster_path,
-        adult: movie.adult,
-        overview: movie.overview,
-        releaseDate: movie.release_date,
-        genres: movie.genre_ids,
         id: movie.id,
         title: movie.title,
-        language: movie.original_language,
-        backdropURL: movie.backdrop_path,
-        popularity: movie.popularity,
-        voteCnt: movie.vote_count,
-        video: movie.video,
-        voteAvg: movie.vote_average,
-        userWatchStatus: '',
-        userRating: -1,
+        posterURL: movie.poster_path,
+        overview: movie.overview,
       });
     });
-    console.log(movies);
     return movies;
+  }
+
+  public parseMovieDetails(data: any): MovieDetail {
+    return {
+      id: data.id,
+      title: data.title,
+      posterURL: data.poster_path,
+      overview: data.overview,
+      adult: data.adult,
+      backdropURL: data.backdrop_path,
+      genres: data.genres,
+      homepage: data.homepage,
+      language: data.original_language,
+      popularity: data.popularity,
+      releaseDate: data.release_date,
+      revenue: data.revenue,
+      runtime: data.runtime,
+      tagline: data.tagline,
+      video: data.video,
+      voteAvg: data.vote_average,
+      voteCnt: data.vote_count,
+      userWatchStatus: '',
+      userRating: -1,
+    };
   }
 }

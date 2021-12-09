@@ -1,9 +1,31 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Search</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar
+    placeholder="Search a Movie"
+    searchIcon="search"
+    (search)="searchMovies($event.target.value)"
+    animated
+  >
+  </ion-searchbar>
 
+  <ion-list style="background-color: transparent;">
+    <ion-card *ngFor="let movie of this.movies" button="true" [routerLink]="['/explore/search',movie.id]"
+      style="margin: 20px; margin-top: 10px; border-radius: 10px;">
+      <ion-card-header style="padding: 0px">
+        <ion-card-subtitle style="padding: 20px; padding-top: 15px; padding-bottom: 0px"></ion-card-subtitle>
+        <ion-card-title style="padding: 20px; padding-top: 0px; padding-bottom: 0px">{{ movie.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content style="padding: 20px; padding-top: 20px; padding-bottom: 25px">
+        {{movie.overview}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>

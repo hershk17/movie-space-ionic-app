@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie';
 
 @Component({
@@ -8,9 +9,9 @@ import { Movie } from 'src/app/models/movie';
 })
 export class MovieCardsComponent implements OnInit {
   @Input() movies: Movie[];
+  @Input() size: boolean;
 
-  constructor() { }
+  constructor(public router: Router) {}
 
   ngOnInit() {}
-
 }

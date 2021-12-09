@@ -27,14 +27,35 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'search',
+        path: 'home/search',
         loadChildren: () =>
           import('../pages/search/search.module').then(
             (m) => m.SearchPageModule
           ),
       },
       {
-        path: 'movie/:id',
+        path: 'explore/search',
+        loadChildren: () =>
+          import('../pages/search/search.module').then(
+            (m) => m.SearchPageModule
+          ),
+      },
+      {
+        path: 'home/movie/:id',
+        loadChildren: () =>
+          import('../pages/movie-details/movie-details.module').then(
+            (m) => m.MovieDetailsPageModule
+          ),
+      },
+      {
+        path: 'explore/genre/:id',
+        loadChildren: () =>
+          import('../pages/movie-details/movie-details.module').then(
+            (m) => m.MovieDetailsPageModule
+          ),
+      },
+      {
+        path: 'library/movie/:id',
         loadChildren: () =>
           import('../pages/movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
@@ -49,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
 ];

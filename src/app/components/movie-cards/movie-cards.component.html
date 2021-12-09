@@ -3,11 +3,11 @@
 >
   <ion-slide
     *ngFor="let movie of this.movies"
-    style="width: 160px; background-color: transparent"
+    [style.width.px]="this.size" style="background-color: transparent"
   >
     <ion-col>
       <ion-button
-        [routerLink]="['/movie', movie.id]"
+        [routerLink]="['/home/movie', movie.id]"
         fill="clear"
         class="ion-no-padding"
         style="width: auto; height: auto; --border-radius: 10px"

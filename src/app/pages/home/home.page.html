@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/home/search']">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -8,20 +13,32 @@
   <ion-item>
     <h1>Now Playing</h1>
   </ion-item>
-  <app-movie-cards [movies]="this.nowPlayingMovies"></app-movie-cards>
+  <app-movie-cards
+    [movies]="this.nowPlayingMovies"
+    [size]="250"
+  ></app-movie-cards>
 
   <ion-item>
     <h1>Trending</h1>
   </ion-item>
-  <app-movie-cards [movies]="this.trendingMovies"></app-movie-cards>
+  <app-movie-cards
+    [movies]="this.trendingMovies"
+    [size]="150"
+  ></app-movie-cards>
 
   <ion-item>
     <h1>Upcoming</h1>
   </ion-item>
-  <app-movie-cards [movies]="this.upcomingMovies"></app-movie-cards>
+  <app-movie-cards
+    [movies]="this.upcomingMovies"
+    [size]="150"
+  ></app-movie-cards>
 
   <ion-item>
     <h1>Top Rated</h1>
   </ion-item>
-  <app-movie-cards [movies]="this.topRatedMovies"></app-movie-cards>
+  <app-movie-cards
+    [movies]="this.topRatedMovies"
+    [size]="150"
+  ></app-movie-cards>
 </ion-content>

@@ -1,14 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Library</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-button (click)="readData()" expand="block" fill="solid" shape="round">
-    Read DB Movies
-  </ion-button>
-
   <ion-list>
     <ion-card *ngFor="let movie of this.movies">
       <ion-grid>
