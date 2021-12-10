@@ -33,12 +33,10 @@ export class DbService {
           this.httpClient
             .get('assets/dump.sql', { responseType: 'text' })
             .subscribe((data) => {
-              this.sqlPorter
-                .importSqlToDb(this.storage, data)
-                .then((_) => {
-                  this.loadMovies();
-                  this.isDbReady.next(true);
-                });
+              this.sqlPorter.importSqlToDb(this.storage, data).then((_) => {
+                this.loadMovies();
+                this.isDbReady.next(true);
+              });
             });
         });
     });
@@ -78,7 +76,7 @@ export class DbService {
     this.moviesList.next(movies);
   }
 
-  public async addMovie(movie: MovieDetail) {
+  public addMovie(movie: MovieDetail) {
     const data = [
       movie.id,
       movie.title,
@@ -95,15 +93,24 @@ export class DbService {
       movie.voteAvg,
       movie.voteCnt,
     ];
-    await this.storage
+    this.storage
       .executeSql(
         'INSERT INTO moviesTable VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
         data
       )
       .then(() => {
+        this.loadMovies();
         this.ms.presentToast('Movie added to Library!', 'success');
       });
-    this.loadMovies();
+  }
+
+  public deleteMovie(id: number) {
+    this.storage
+      .executeSql('DELETE FROM moviesTable WHERE id = ?', [id])
+      .then(() => {
+        this.ms.presentToast('Movie removed from Library.', 'warning');
+        this.loadMovies();
+      });
   }
 
   public async getMovie(id: number): Promise<MovieDetail> {
@@ -125,22 +132,5 @@ export class DbService {
         voteAvg: res.rows.item(0).voteAvg,
         voteCnt: res.rows.item(0).voteCnt,
       }));
-  }
-
-  public async updateMovie(id: number, movie: MovieDetail) {
-    // await this.storage.executeSql(
-    //   `UPDATE moviesTable SET artist_name = ?, song_name = ? WHERE id = ${id}`,
-    //   Object.values(movie)
-    // );
-    this.loadMovies();
-  }
-
-  public async deleteMovie(id: number) {
-    await this.storage
-      .executeSql('DELETE FROM moviesTable WHERE id = ?', [id])
-      .then(() => {
-        this.ms.presentToast('Movie removed from Library.', 'warning');
-      });
-    this.loadMovies();
   }
 }

@@ -10,10 +10,7 @@ import { ToastController } from '@ionic/angular';
 export class LibraryPage implements OnInit {
   movies: any[] = [];
 
-  constructor(
-    private db: DbService,
-    private toast: ToastController,
-  ) {}
+  constructor(private db: DbService, private toast: ToastController) {}
 
   ngOnInit() {
     this.db.dbState().subscribe((res) => {
@@ -23,5 +20,9 @@ export class LibraryPage implements OnInit {
         });
       }
     });
+  }
+
+  ionViewWillEnter() {
+    this.db.loadMovies();
   }
 }

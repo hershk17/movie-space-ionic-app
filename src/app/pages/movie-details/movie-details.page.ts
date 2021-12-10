@@ -6,6 +6,8 @@ import { DbService } from 'src/app/services/db.service';
 import { MovieService } from 'src/app/services/movie.service';
 import { Location } from '@angular/common';
 import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-details',
@@ -19,11 +21,13 @@ export class MovieDetailsPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private db: DbService,
     private api: ApiService,
     private ms: MovieService,
     private readonly location: Location,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {}
@@ -37,7 +41,7 @@ export class MovieDetailsPage implements OnInit {
   };
 
   onBackClick() {
-    this.location.back();
+    this.router.navigateByUrl(this.router.url.split('/movie/')[0]);
   }
 
   ionViewWillEnter() {
@@ -69,8 +73,4 @@ export class MovieDetailsPage implements OnInit {
     this.db.deleteMovie(this.movie.id);
     this.isSaved = false;
   }
-
-  // public onUpdate(status) {
-  //   this.db.deleteMovie(this.movie.id);
-  // }
 }

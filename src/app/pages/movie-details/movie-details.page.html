@@ -10,14 +10,42 @@
       filter: brightness(40%);
     "
   />
-  <ion-button
-    (click)="onBackClick()"
-    fill="clear"
-    color="light"
-    style="margin-top: -850px"
+  <div
+    style="
+      margin-top: -440px;
+      margin-bottom: 400px;
+      margin-left: 5px;
+      margin-right: 5px;
+      display: flex;
+      justify-content: space-between;
+    "
   >
-    <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-  </ion-button>
+    <ion-button
+      (click)="onBackClick()"
+      fill="clear"
+      color="light"
+      style="height: 50px; --border-radius: 50px"
+    >
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-button
+      *ngIf="!this.isSaved && this.isLoaded"
+      (click)="onAdd()"
+      fill="clear"
+      color="light"
+      style="height: 50px; --border-radius: 50px"
+      ><ion-icon name="star-outline" style="font-size: 25px"></ion-icon>
+    </ion-button>
+    <ion-button
+      *ngIf="this.isSaved && this.isLoaded"
+      (click)="onRemove()"
+      fill="clear"
+      color="warning"
+      style="height: 50px; --border-radius: 50px"
+      ><ion-icon name="star" style="font-size: 25px"></ion-icon>
+    </ion-button>
+  </div>
+
   <div color="primary" style="margin-top: -220px; margin-bottom: 40px">
     <ion-card-content style="color: white">
       <ion-card-header>
@@ -35,33 +63,12 @@
           ({{this.movie?.voteCnt}})
         </ion-card-subtitle>
         <ion-card-subtitle style="color: lightgray">
-          {{this.movie?.releaseDate}}, {{this.convertMinsToHrsMins(this.movie?.runtime)}}
+          {{this.movie?.releaseDate}},
+          {{this.convertMinsToHrsMins(this.movie?.runtime)}}
         </ion-card-subtitle>
       </ion-card-header>
     </ion-card-content>
   </div>
-
-  <ion-fab
-    *ngIf="!this.isSaved && this.isLoaded"
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-  >
-    <ion-fab-button (click)="onAdd()" color="success">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-fab
-    *ngIf="this.isSaved && this.isLoaded"
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-  >
-    <ion-fab-button (click)="onRemove()" color="danger">
-      <ion-icon name="remove"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
   <ion-card style="border-radius: 10px; margin: 15px; padding: 6px">
     <ion-card-header>
@@ -93,7 +100,7 @@
     <ion-card-content>
       Budget: {{this.movie?.budget}} <br />
       Revenue: {{this.movie?.revenue}} <br />
-      Language: {{this.movie?.language}} <br />
+      Language: {{this.movie?.language}} <br /><br />
       Click <a href="{{this.movie?.homepage}}">here</a> to visit this movie's
       homepage.
     </ion-card-content>
