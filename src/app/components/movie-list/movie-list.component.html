@@ -20,7 +20,11 @@
             }}</ion-card-title>
           </ion-card-header>
           <ion-card-content style="padding: 10px">
-            some more info maybe here
+            <ion-card-subtitle style="color: lightgray">
+              <b style="color: white">{{ movie.voteAvg }}★</b>
+              ({{ movie.voteCnt }})<br />
+              {{ movie.releaseDate }}
+            </ion-card-subtitle>
           </ion-card-content>
         </ion-col>
       </ion-row>

@@ -28,6 +28,9 @@ export class MovieService {
         title: movie.title,
         posterURL: movie.poster_path,
         overview: movie.overview,
+        releaseDate: movie.release_date,
+        voteAvg: movie.vote_average,
+        voteCnt: movie.vote_count,
       });
     });
     return movies;

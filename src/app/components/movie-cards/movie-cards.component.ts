@@ -9,7 +9,7 @@ import { Movie } from 'src/app/models/movie';
 })
 export class MovieCardsComponent implements OnInit {
   @Input() movies: Movie[];
-  @Input() size: boolean;
+  @Input() size: number;
 
   constructor(public router: Router) {}
 

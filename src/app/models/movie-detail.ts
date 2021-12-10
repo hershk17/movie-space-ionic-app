@@ -7,9 +7,6 @@ export interface MovieDetail extends Movie {
   genres: Genre[];
   homepage: string;
   language: string;
-  releaseDate: string;
   revenue: number;
   runtime: number;
-  voteAvg: number;
-  voteCnt: number;
 }
