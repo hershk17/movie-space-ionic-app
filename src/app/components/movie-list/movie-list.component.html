@@ -15,13 +15,13 @@
         </ion-col>
         <ion-col size="8">
           <ion-card-header style="padding: 0px">
-            <ion-card-title style="padding: 10px">{{
+            <ion-card-title style="padding: 10px"><b>{{
               movie.title
-            }}</ion-card-title>
+            }}</b></ion-card-title>
           </ion-card-header>
           <ion-card-content style="padding: 10px">
-            <ion-card-subtitle style="color: lightgray">
-              <b style="color: white">{{ movie.voteAvg }}★</b>
+            <ion-card-subtitle style="color: gray">
+              <span style="color: black">{{ movie.voteAvg }}★</span>
               ({{ movie.voteCnt }})<br />
               {{ movie.releaseDate }}
             </ion-card-subtitle>

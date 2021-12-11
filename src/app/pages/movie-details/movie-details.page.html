@@ -46,16 +46,10 @@
     </ion-button>
   </div>
 
-  <div color="primary" style="margin-top: -220px; margin-bottom: 40px">
-    <ion-card-content style="color: white">
+  <div color="primary" style="position: relative; margin-top: -50px">
+    <ion-card-content style="position: absolute; bottom: 0; color: white">
       <ion-card-header>
-        <ion-card-title
-          style="
-            color: white;
-            font-size: 40px;
-            white-space: nowrap;
-            overflow: hidden;
-          "
+        <ion-card-title style="color: white; font-size: 36px"
           ><b>{{this.movie?.title}}</b>
         </ion-card-title>
         <ion-card-subtitle style="color: lightgray">
@@ -69,40 +63,41 @@
       </ion-card-header>
     </ion-card-content>
   </div>
-
-  <ion-card style="border-radius: 10px; margin: 15px; padding: 6px">
-    <ion-card-header>
-      <ion-card-title>Overview</ion-card-title>
-    </ion-card-header>
-    <ion-card-content> {{this.movie?.overview}} </ion-card-content>
-    <ion-card-header>
-      <ion-card-title>Genres</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button
-        *ngFor="let genre of this.movie?.genres"
-        style="
-          margin-left: -3px;
-          opacity: 0.7;
-          --border-radius: 20px;
-          margin-right: 10px;
-        "
-        fill="outline"
-        color="dark"
-        disabled
-      >
-        {{genre.name}}
-      </ion-button>
-    </ion-card-content>
-    <ion-card-header>
-      <ion-card-title>Additional Info</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Budget: {{this.movie?.budget}} <br />
-      Revenue: {{this.movie?.revenue}} <br />
-      Language: {{this.movie?.language}} <br /><br />
-      Click <a href="{{this.movie?.homepage}}">here</a> to visit this movie's
-      homepage.
-    </ion-card-content>
-  </ion-card>
+  <div style="position: static; margin-top: 450px">
+    <ion-card style="border-radius: 10px; margin: 15px; padding: 6px">
+      <ion-card-header>
+        <ion-card-title>Overview</ion-card-title>
+      </ion-card-header>
+      <ion-card-content> {{this.movie?.overview}} </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Genres</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button
+          *ngFor="let genre of this.movie?.genres"
+          style="
+            margin-left: -3px;
+            opacity: 0.7;
+            --border-radius: 20px;
+            margin-right: 10px;
+          "
+          fill="outline"
+          color="dark"
+          disabled
+        >
+          {{genre.name}}
+        </ion-button>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Additional Info</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Budget: {{this.movie?.budget}} <br />
+        Revenue: {{this.movie?.revenue}} <br />
+        Language: {{this.movie?.language}} <br /><br />
+        Click <a href="{{this.movie?.homepage}}">here</a> to visit this movie's
+        homepage.
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
