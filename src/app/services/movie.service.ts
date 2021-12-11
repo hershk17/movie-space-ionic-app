@@ -14,8 +14,8 @@ export class MovieService {
       message: msg,
       duration: 2000,
       color: c,
-      position: 'top',
-      cssClass: 'header-top',
+      position: 'bottom',
+      cssClass: 'header-bottom',
     });
     toast.present();
   }

@@ -10,75 +10,75 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () =>
-          import('../pages/home/home.module').then((m) => m.HomePageModule),
+          import('../home/home.module').then((m) => m.HomePageModule),
       },
       {
         path: 'home/movie/:id',
         loadChildren: () =>
-          import('../pages/movie-details/movie-details.module').then(
+          import('../movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
           ),
       },
       {
         path: 'home/search',
         loadChildren: () =>
-          import('../pages/search/search.module').then(
+          import('../search/search.module').then(
             (m) => m.SearchPageModule
           ),
       },
       {
         path: 'home/search/movie/:id',
         loadChildren: () =>
-          import('../pages/movie-details/movie-details.module').then(
+          import('../movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
           ),
       },
       {
         path: 'explore',
         loadChildren: () =>
-          import('../pages/explore/explore.module').then(
+          import('../explore/explore.module').then(
             (m) => m.ExplorePageModule
           ),
       },
       {
         path: 'explore/search',
         loadChildren: () =>
-          import('../pages/search/search.module').then(
+          import('../search/search.module').then(
             (m) => m.SearchPageModule
           ),
       },
       {
         path: 'explore/search/movie/:id',
         loadChildren: () =>
-          import('../pages/movie-details/movie-details.module').then(
+          import('../movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
           ),
       },
       {
         path: 'explore/genre/:genreID',
         loadChildren: () =>
-          import('../pages/explore-genre/explore-genre.module').then(
+          import('../explore-genre/explore-genre.module').then(
             (m) => m.ExploreGenrePageModule
           ),
       },
       {
         path: 'explore/genre/:genreID/movie/:id',
         loadChildren: () =>
-          import('../pages/movie-details/movie-details.module').then(
+          import('../movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
           ),
       },
       {
         path: 'library',
         loadChildren: () =>
-          import('../pages/library/library.module').then(
+          import('../library/library.module').then(
             (m) => m.LibraryPageModule
           ),
       },
       {
         path: 'library/movie/:id',
         loadChildren: () =>
-          import('../pages/movie-details/movie-details.module').then(
+          import('../movie-details/movie-details.module').then(
             (m) => m.MovieDetailsPageModule
           ),
       },
